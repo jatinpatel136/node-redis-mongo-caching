@@ -1,0 +1,36 @@
+[{
+    "firstName": "Jatin",
+    "middleName": "p",
+    "lastName": "patel",
+    "gender": "Male",
+    "email": "jatin@gmail.com",
+    "designation": "Manager",
+    "type": "fulltime"
+},
+{
+    "firstName": "Vicky",
+    "middleName": "p",
+    "lastName": "Patel",
+    "gender": "Male",
+    "email": "vicky@gmail.com",
+    "designation": "front-developer",
+    "type": "fulltime"
+},
+{
+    "firstName": "John",
+    "middleName": "a",
+    "lastName": "Smith",
+    "gender": "male",
+    "email": "john@gmail.com",
+    "designation": "backend-developer",
+    "type": "parttime"
+},
+{
+    "firstName": "Stacy",
+    "middleName": "b",
+    "lastName": "Banks",
+    "gender": "Female",
+    "email": "stacy@gmail.com",
+    "designation": "test-engineer",
+    "type": "parttime"
+}]
