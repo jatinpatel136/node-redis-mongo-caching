@@ -24,6 +24,14 @@ services:
       - "27017:27017"
     networks:
       - nodeapp-network
+  
+  redis:
+   container_name: redis
+   image: redis:alpine
+   ports:
+    - "6379:6379"
+   expose:
+    - 6379
 
 networks:
   nodeapp-network:

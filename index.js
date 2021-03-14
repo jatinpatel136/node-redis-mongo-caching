@@ -2,8 +2,15 @@ const express = require('express');
 const app = express();
 const dotenv = require('dotenv');
 const cors = require('cors');
+var redis = require('redis');
 const Employee = require('./models/Employee');
 const connectDB = require('./config/db');
+
+const client = redis.createClient(process.env.REDIS_URL);
+
+client.on("error", function(error) {
+    console.error(error);
+});
 
 // Load env files
 dotenv.config({ path: './config/config.env' });
