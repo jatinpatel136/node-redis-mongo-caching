@@ -23,9 +23,9 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 3000
 app.listen(PORT, console.log(`server running on ${PORT}`));
 
-// Handle unhandled promise rejection
-process.on('unhandledRejection', (err, promise) => {
-    console.log(`Error: ${err.message}`.red);
-    // close server and exit
-    server.close(() => process.exit(1));
-})
+// // Handle unhandled promise rejection
+// process.on('unhandledRejection', (err, promise) => {
+//     console.log(`Error: ${err.message}`);
+//     // close server and exit
+//     server.close(() => process.exit(1));
+// })
