@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "82224e99-06c3-4c2f-b060-317982dc8f88",
+		"name": "ACC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Single Employee",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/employees/5d725a4a7b292f5f8ceff789",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"employees",
+						"5d725a4a7b292f5f8ceff789"
+					]
+				},
+				"description": "Get a specific employee"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all employees",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/employees/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"employees",
+						""
+					]
+				},
+				"description": "Get all employees from Database"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Employee",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"firstName\": \"Jatin1\",\n        \"middleName\": \"p\",\n        \"lastName\": \"patel\",\n        \"gender\": \"Male\",\n        \"email\": \"jatin@gmail.com\",\n        \"designation\": \"Manager\",\n        \"type\": \"fulltime\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/employees/5d725a4a7b292f5f8ceff789",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"employees",
+						"5d725a4a7b292f5f8ceff789"
+					]
+				},
+				"description": "Update employee record in database"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Employee",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"firstName\": \"Jatin1\",\n        \"middleName\": \"p\",\n        \"lastName\": \"patel\",\n        \"gender\": \"Male\",\n        \"email\": \"jatin@gmail.com\",\n        \"designation\": \"Manager\",\n        \"type\": \"fulltime\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/employees/5d725a4a7b292f5f8ceff789",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"employees",
+						"5d725a4a7b292f5f8ceff789"
+					]
+				},
+				"description": "delete a specific record from database"
+			},
+			"response": []
+		}
+	]
+}
