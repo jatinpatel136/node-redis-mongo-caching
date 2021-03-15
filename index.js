@@ -3,13 +3,11 @@ const app = express();
 const dotenv = require('dotenv');
 const cors = require('cors');
 var redis = require('redis');
+const { clearKey } = require("./services/cache");
 const Employee = require('./models/Employee');
 const connectDB = require('./config/db');
 
-console.log(process.env.REDIS_URL)
-const client = redis.createClient(process.env.REDIS_URL);
-
-client.on("error", function(error) {
+client.on("error", function (error) {
     console.error(error);
 });
 
@@ -31,11 +29,12 @@ app.get('/', (req, res) => {
 
 app.post('/employees', async (req, res, next) => {
     const employee = await Employee.create(req.body);
+    clearKey(Employee.collection.collectionName);
     res.status(201).json({ success: true, data: employee });
 })
 
 app.get('/employees', async (req, res, next) => {
-    const employees = await Employee.find();
+    const employees = await Employee.find().cache();
     res.status(200).json({ success: true, data: employees });
 })
 
@@ -43,14 +42,14 @@ app.get('/employees/:id', async (req, res, next) => {
 
     const { id } = req.params;
 
-    client.get(id, async(err,data)=>{
-        if(err) throw err
-       
-        if(data != null){
+    client.get(id, async (err, data) => {
+        if (err) throw err
+
+        if (data != null) {
             console.log('Fetched frome cache')
-            res.status(200).json({ success: true, data:JSON.parse(data) });
+            res.status(200).json({ success: true, data: JSON.parse(data) });
         }
-        else{
+        else {
             const employee = await Employee.findById(id);
             console.log('Fetched from mongodb')
             if (!employee) {
