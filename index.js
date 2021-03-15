@@ -6,6 +6,7 @@ var redis = require('redis');
 const Employee = require('./models/Employee');
 const connectDB = require('./config/db');
 
+console.log(process.env.REDIS_URL)
 const client = redis.createClient(process.env.REDIS_URL);
 
 client.on("error", function(error) {
@@ -39,12 +40,27 @@ app.get('/employees', async (req, res, next) => {
 })
 
 app.get('/employees/:id', async (req, res, next) => {
-    const employee = await Employee.findById(req.params.id);
-    if (!employee) {
-        // This is error when Object id is properly formatted but not found in Database
-        return next(new ErrorResponse(`Employee with ${req.params.id} not found`, 404));
-    }
-    res.status(200).json({ success: true, data: employee });
+
+    const { id } = req.params;
+
+    client.get(id, async(err,data)=>{
+        if(err) throw err
+       
+        if(data != null){
+            console.log('Fetched frome cache')
+            res.status(200).json({ success: true, data:JSON.parse(data) });
+        }
+        else{
+            const employee = await Employee.findById(id);
+            console.log('Fetched from mongodb')
+            if (!employee) {
+                // This is error when Object id is properly formatted but not found in Database
+                return next(new ErrorResponse(`Employee with ${req.params.id} not found`, 404));
+            }
+            res.status(200).json({ success: true, data: employee });
+            client.set(id, JSON.stringify(employee))
+        }
+    })
 });
 
 app.put('/employees/:id', async (req, res, next) => {
