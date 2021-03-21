@@ -1,0 +1,44 @@
+version: '3.7'
+
+services:
+
+  node:
+    container_name: nodeapp
+    image: nodeapp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - REDIS_URL=redis://redis
+    ports:
+      - "5000:5000"
+    networks:
+      - nodeapp-network
+    depends_on: 
+      - mongodb
+      - redis
+    links:
+      - mongodb
+      - redis
+      
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - nodeapp-network
+  
+  redis:
+   container_name: redis
+   image: redis
+   ports:
+    - "6379:6379"
+   expose:
+    - 6379
+   networks:
+      - nodeapp-network
+
+networks:
+  nodeapp-network:
+    driver: bridge
