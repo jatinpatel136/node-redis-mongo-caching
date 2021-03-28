@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "82224e99-06c3-4c2f-b060-317982dc8f88",
+		"_postman_id": "a9a08828-42b1-44e5-9e7a-51ccee5eb351",
 		"name": "ACC",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -10,10 +10,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://localhost:5000/employees/5d725a4a7b292f5f8ceff789",
 					"protocol": "http",
@@ -35,10 +31,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://localhost:5000/employees/",
 					"protocol": "http",
@@ -116,6 +108,36 @@
 					]
 				},
 				"description": "delete a specific record from database"
+			},
+			"response": []
+		},
+		{
+			"name": "Create a employee",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"firstName\": \"Jatin2\",\r\n        \"middleName\": \"p\",\r\n        \"lastName\": \"patel\",\r\n        \"gender\": \"Male\",\r\n        \"email\": \"jatin2@gmail.com\",\r\n        \"designation\": \"Manager\",\r\n        \"type\": \"fulltime\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/employees/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"employees",
+						""
+					]
+				},
+				"description": "Create a new employee record"
 			},
 			"response": []
 		}

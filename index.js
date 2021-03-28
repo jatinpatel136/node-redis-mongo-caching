@@ -36,6 +36,12 @@ app.post('/employees', async (req, res, next) => {
     res.status(201).json({ success: true, data: employee });
 })
 
+function sleep(ms) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+}
+
 app.get('/employees', async (req, res, next) => {
     client.get(Employee.collection.collectionName, async(err, data)=>{
         if (err) throw err
@@ -45,8 +51,9 @@ app.get('/employees', async (req, res, next) => {
             res.status(200).json({ success: true, data: JSON.parse(data) });
         } else {
             console.log('Fetched all employees from mongodb')
+            await sleep(2000)
             const employees = await Employee.find();
-            client.setex(Employee.collection.collectionName, 60, JSON.stringify(employees));
+            client.setex(Employee.collection.collectionName, 2, JSON.stringify(employees));
             res.status(200).json({ success: true, data: employees });
         }
     })
@@ -65,13 +72,14 @@ app.get('/employees/:id', async (req, res, next) => {
             res.status(200).json({ success: true, data: JSON.parse(data) });
         }
         else {
+            await sleep(1000)
             const employee = await Employee.findById(id);
             console.log(`Fetched ${id} employee record from mongodb`)
             if (!employee) {
                 // This is error when Object id is properly formatted but not found in Database
                 return next(new ErrorResponse(`Employee with ${req.params.id} not found`, 404));
             }
-            client.setex(id, 60, JSON.stringify(employee))
+            client.setex(id, 2, JSON.stringify(employee))
             res.status(200).json({ success: true, data: employee });
         }
     })
