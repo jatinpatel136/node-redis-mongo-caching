@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  nodeapp-depl
+  namespace: default
+  labels:
+    app:  nodeapp-depl
+spec:
+  selector:
+    matchLabels:
+      app: nodeapp-depl
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app:  nodeapp-depl
+    spec:
+      containers:
+      - name:  nodeapp-depl
+        image:  jpatel136/caching
+        imagePullPolicy: Never
+        ports:
+          - containerPort: 5000
+        # env:
+        #   - name: REDIS_URI
+        #     valueFrom:
+        #       secretKeyRef:
+        #         key: uri
+        #         name: redis

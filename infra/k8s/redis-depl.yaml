@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 6379
+        # data volume where redis writes data
+      #   volumeMounts:
+      #   - name: data
+      #     mountPath: /data
+      #     readOnly: false
+      # volumes:
+      # - name: data
+      #   persistentVolumeClaim:
+      #     claimName: redis-data
