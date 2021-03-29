@@ -23,7 +23,7 @@ spec:
           - containerPort: 5000
         env:
           - name: MONGO_URL
-            value: mongodb://mongodb:27017/dev
+            value: mongodb://mongodb:27017/employeeDB
         # env:
         #   - name: REDIS_URI
         #     valueFrom:
