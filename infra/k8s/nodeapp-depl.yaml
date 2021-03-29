@@ -21,6 +21,9 @@ spec:
         imagePullPolicy: Never
         ports:
           - containerPort: 5000
+        env:
+          - name: MONGO_URL
+            value: mongodb://mongodb:27017/dev
         # env:
         #   - name: REDIS_URI
         #     valueFrom:
