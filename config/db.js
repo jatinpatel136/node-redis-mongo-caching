@@ -10,6 +10,7 @@ const connectDB = async () => {
     try {
         // error in connection to mongodb contianer was solved using this url https://github.com/docker/hub-feedback/issues/1255 - use your mongodb service name instead of localhost or 127.0.0.1
         
+        console.log(process.env.MONGO_URI)
         const conn = await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false, useUnifiedTopology: true })
 
         console.log(`Mongodb connected: ${conn.connection.host}`)        
