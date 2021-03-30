@@ -22,11 +22,22 @@ spec:
         ports:
           - containerPort: 5000
         env:
-          - name: MONGO_URL
+          - name: MONGO_URI
             value: mongodb://mongodb:27017/employeeDB
-        # env:
-        #   - name: REDIS_URI
-        #     valueFrom:
-        #       secretKeyRef:
-        #         key: uri
-        #         name: redis
+          - name: REDIS_URL
+            value: redis://redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeapp-service
+  namespace: default
+spec:
+  selector:
+    app: nodeapp-depl
+  type: NodePort
+  ports:
+  - port: 5000
+    targetPort: 5000
+    protocol: TCP
+    # nodePort: 30000

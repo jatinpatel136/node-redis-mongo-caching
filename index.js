@@ -6,7 +6,7 @@ const redis = require("redis");
 const Employee = require('./models/Employee');
 const connectDB = require('./config/db');
 
-console.log(process.env.REDIS_URL)
+console.log('process.env.REDIS_URL',process.env.REDIS_URL)
 const client = redis.createClient(process.env.REDIS_URL);
 
 client.on("error", function (error) {
