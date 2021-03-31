@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       app: nodeapp-depl
-  replicas: 1
+  replicas: 3
   template:
     metadata:
       labels:
@@ -26,3 +26,18 @@ spec:
             value: mongodb://mongodb:27017/employeeDB
           - name: REDIS_URL
             value: redis://redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeapp-service
+  namespace: default
+spec:
+  selector:
+    app: nodeapp-depl
+  type: NodePort
+  ports:
+  - port: 5000
+    targetPort: 5000
+    protocol: TCP
+    # nodePort: 30000

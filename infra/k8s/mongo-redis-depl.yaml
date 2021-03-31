@@ -18,6 +18,8 @@ spec:
       containers:
       - name:  mongodb
         image:  mongo
+        command:
+          - mongod
         ports:
         - containerPort: 27017
         # env:
@@ -43,4 +45,46 @@ spec:
   ports:
   - port: 27017
     targetPort: 27017
-    protocol: TCP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 6379
+        # data volume where redis writes data
+      #   volumeMounts:
+      #   - name: data
+      #     mountPath: /data
+      #     readOnly: false
+      # volumes:
+      # - name: data
+      #   persistentVolumeClaim:
+      #     claimName: redis-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  labels:
+    app: redis
+spec:
+  ports:
+  - port: 6379
+    name: redis
+  selector:
+    app: redis

@@ -11,4 +11,4 @@ RUN         npm install
 COPY        . .
 EXPOSE      $PORT
 
-CMD  "node" "index.js"
+CMD  "npm" "run" "start"

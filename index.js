@@ -51,7 +51,7 @@ app.get('/employees', async (req, res, next) => {
             res.status(200).json({ success: true, data: JSON.parse(data) });
         } else {
             console.log('Fetched all employees from mongodb')
-            await sleep(2000)
+            await sleep(3000)
             const employees = await Employee.find();
             client.setex(Employee.collection.collectionName, 2, JSON.stringify(employees));
             res.status(200).json({ success: true, data: employees });
